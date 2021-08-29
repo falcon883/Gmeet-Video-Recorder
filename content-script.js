@@ -7,11 +7,15 @@ function sleep(ms) {
 }
 
 async function GetParticipants() {
+    if (document.querySelectorAll('button[jsname="A5il2e"]').length == 0) {
+        alert("You need to join a meeting first.")
+        return
+    }
     let participants = []
     let participantList = document.querySelector('div[aria-label="Participants"]')
 
     if (!participantList) {
-        alert("To access participation list it needs to opened first. So, the program will open and close the panel. Please do not interfere it.")
+        alert("To access participation list it needs to opened first. So, the program will open and close the panel.")
         const pbtn = document.querySelectorAll('button[jsname="A5il2e"]')[1]
         pbtn.click()
         await sleep(500)
@@ -26,7 +30,7 @@ async function GetParticipants() {
         participants.push({ name: name, dpUrl: displayPicUrl, videoId: "" })
     }
     participants = GetParticipantsVideo(participants)
-    // console.log(participants);
+
     sendMsg("participants", participants)
 }
 
@@ -55,5 +59,6 @@ function SanitizeName(name) {
         .replace('Presentation', ' (Presentation)').replace('Your presentation', ' (Your presentation)')
     return name.trim()
 }
+
 
 GetParticipants()

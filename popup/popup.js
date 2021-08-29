@@ -1,5 +1,4 @@
 const participants = document.querySelector('.participants')
-const noList = document.querySelector('.no-list')
 
 const allowedUrls = [
     'https://meet.google.com/',
@@ -17,7 +16,7 @@ chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
         if (request.info == 'participants') {
             if (request.data) {
-                noList.classList.add('hide')
+                document.querySelector('.disabled').classList.add('hide')
                 participants.innerHTML = ''
                 participants.classList.remove('hide')
                 request.data.forEach(e => {
@@ -71,14 +70,6 @@ function AddCard(parent, name, dp, videoId) {
     parent.appendChild(elemP)
 }
 
-document.getElementById('getp').addEventListener("click", async () => {
-    chrome.runtime.sendMessage({
-        task: 'get_participants'
-    }, function (response) {
-        console.log(response.resp);
-    });
-});
-
 function addRecordListener(elem, videoId) {
     elem.addEventListener('click', () => {
         let toggled = (elem.getAttribute('data-toggled') === 'true')
@@ -105,3 +96,9 @@ function addRecordListener(elem, videoId) {
         }
     })
 }
+
+chrome.runtime.sendMessage({
+    task: 'get_participants'
+}, function (response) {
+    console.log(response.resp);
+});
