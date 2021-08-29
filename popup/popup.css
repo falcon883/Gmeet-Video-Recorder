@@ -1,0 +1,140 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 500px;
+  background-color: #131313;
+  padding: 1.2em;
+}
+
+.overlay {
+  background-color: #EFEFEF;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  opacity: .5;
+  filter: alpha(opacity=50);
+}
+
+.hide {
+  display: none !important;
+}
+
+.no-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.no-list .btn {
+  padding: .8em;
+  background-color: #313131;
+  color: white;
+  font-size: 1rem;
+  font-family: inherit;
+  border: none;
+  margin-top: .8rem;
+}
+
+.btn:hover {
+  opacity: .85;
+  cursor: pointer;
+}
+
+.btn:active {
+  -webkit-transform: scale(0.96);
+          transform: scale(0.96);
+}
+
+.participants .participant {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #313131;
+  padding: .8em;
+  border-radius: 10px;
+  margin: .4rem 0;
+  -webkit-box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.participants .participant .display-pic {
+  width: 48px;
+  height: auto;
+  border-radius: 50%;
+}
+
+.participants .participant .name {
+  margin-left: 1rem;
+  color: white;
+  font-size: 1rem;
+}
+
+.participants .participant .rec-btn {
+  height: 24px;
+  color: white;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.participants .participant .rec-btn[data-toggled="true"] {
+  color: red;
+  -webkit-animation: blink 1s alternate infinite;
+          animation: blink 1s alternate infinite;
+}
+
+.participants .participant .rec-btn.disabled {
+  color: darkgray;
+  cursor: default;
+}
+
+@-webkit-keyframes blink {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.4;
+  }
+}
+
+@keyframes blink {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.4;
+  }
+}
+/*# sourceMappingURL=popup.css.map */

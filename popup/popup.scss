@@ -1,0 +1,106 @@
+* {
+    box-sizing : border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+html,
+body {
+    margin : 0;
+    padding: 0;
+}
+
+body {
+    width           : 500px;
+    background-color: #131313;
+    padding         : 1.2em;
+}
+
+.overlay {
+    background-color: #EFEFEF;
+    position        : fixed;
+    width           : 100%;
+    height          : 100%;
+    z-index         : 1000;
+    top             : 0;
+    left            : 0;
+    opacity         : .5;
+    filter          : alpha(opacity=50);
+}
+
+.hide {
+    display: none !important;
+}
+
+.no-list {
+    display        : flex;
+    flex-direction : column;
+    justify-content: center;
+    align-items    : center;
+
+    .btn {
+        padding         : .8em;
+        background-color: #313131;
+        color           : white;
+        font-size       : 1rem;
+        font-family     : inherit;
+        border          : none;
+        margin-top      : .8rem;
+    }
+}
+
+.btn:hover {
+    opacity: .85;
+    cursor : pointer;
+}
+
+.btn:active {
+    transform: scale(0.96);
+}
+
+.participants {
+    .participant {
+        display         : flex;
+        flex-direction  : row;
+        justify-content : flex-start;
+        align-items     : center;
+        background-color: #313131;
+        padding         : .8em;
+        border-radius   : 10px;
+        margin          : .4rem 0;
+        box-shadow      : 0 4px 14px rgba(0, 0, 0, 0.15);
+
+        .display-pic {
+            width        : 48px;
+            height       : auto;
+            border-radius: 50%;
+        }
+
+        .name {
+            margin-left: 1rem;
+            color      : white;
+            font-size  : 1rem;
+        }
+
+        .rec-btn {
+            height: 24px;
+            color: white;
+            margin-left: auto;
+            cursor: pointer;
+        }
+
+        .rec-btn[data-toggled="true"] {
+            color: red;
+            animation: blink 1s alternate infinite;
+        }
+
+        .rec-btn.disabled {
+            color: darkgray;
+            cursor: default;
+        }
+    }
+}
+
+@keyframes blink {
+    from {opacity: 1;}
+    to {opacity: 0.4;}
+}
