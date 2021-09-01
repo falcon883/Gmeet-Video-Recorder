@@ -1,7 +1,7 @@
 async function start(videoId) {
     function setRecorder(videoId, recorder) {
         try {
-            if (GlobalRecorder == undefined || GlobalRecorder == null) {
+            if (GlobalRecorder == undefined || GlobalRecorder === null) {
                 GlobalRecorder = new Object()
             }
         } catch (e) {
@@ -15,7 +15,7 @@ async function start(videoId) {
     let videos = document.querySelector(`div[data-ssrc="${videoId}"]`)
     let video
 
-    if (videos == null) {
+    if (videos === null) {
         return false
     }
     videos = videos.childNodes
@@ -65,14 +65,14 @@ async function start(videoId) {
 
 async function stop(videoId) {
     function getRecorder(videoId) {
-        if (GlobalRecorder != undefined || GlobalRecorder != null) {
+        if (GlobalRecorder != undefined || GlobalRecorder !== null) {
             return GlobalRecorder[videoId]
         }
         return null
     }
 
     const recorder = getRecorder(videoId)
-    if (recorder != null) {
+    if (recorder !== null) {
         await recorder.stopRecording()
         getSeekableBlob(await recorder.getBlob(), function (seekableBlob) {
             invokeSaveAsDialog(seekableBlob);
