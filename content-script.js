@@ -39,14 +39,12 @@ function GetParticipantsVideo(participants) {
     for (const video of videos) {
         let name = video.parentElement.parentElement.querySelector('div[data-self-name="You"]').textContent
         participants.forEach(p => {
-            let _name = p.name.replace(' (Meeting host)', '').replace(' (Presentation)', '').replace(' (Your presentation)', ' You')
-            // console.log(_name);
+            let _name = p.name.replace(' (Meeting host)', '').replace(' (Your presentation)', ' You')
+
             // console.log(name);
-            if (name.includes('You') && _name.includes('You')) {
-                p.videoId = video.parentElement.getAttribute('data-ssrc')
-                return
-            }
-            if (_name == name) {
+            // console.log(_name);
+            
+            if (name.includes('You') && _name.includes('You') || _name == name || name == `Presentation (${_name.replace(' (Presentation)', '').trim()})`) {
                 p.videoId = video.parentElement.getAttribute('data-ssrc')
             }
         });

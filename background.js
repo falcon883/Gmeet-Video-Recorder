@@ -34,8 +34,31 @@ async function start(videoId) {
         type: 'video',
         mimeType: 'video/webm;codecs=vp8,opus'
     })
+
     recorder.startRecording()
     setRecorder(videoId, recorder)
+
+    chrome.storage.local.get('recordingIds', function (result) {
+        if (result.recordingIds == undefined) {
+            chrome.storage.local.set({ recordingIds: [videoId] }, () => { });
+        } else {
+            if (typeof result.recordingIds != 'object') {
+                chrome.storage.local.remove(['recordingIds'], function () {
+                    const error = chrome.runtime.lastError;
+                    if (error) {
+                        console.error(error);
+                        return
+                    }
+                    chrome.storage.local.set({ recordingIds: [videoId] }, () => { });
+                })
+            } else {
+                const ids = result.recordingIds
+                console.log(ids);
+                ids.push(videoId)
+                chrome.storage.local.set({ recordingIds: ids }, () => { });
+            }
+        }
+    });
 
     return true
 }
@@ -54,6 +77,14 @@ async function stop(videoId) {
         getSeekableBlob(await recorder.getBlob(), function (seekableBlob) {
             invokeSaveAsDialog(seekableBlob);
         })
+        chrome.storage.local.get(['recordingIds'], function (result) {
+            const ids = result.recordingIds
+            var index = ids.indexOf(videoId);
+            if (index >= 0) {
+                ids.splice(index, 1);
+            }
+            chrome.storage.local.set({ recordingIds: ids });
+        });
         return true
     } else {
         sendResponse({
@@ -86,6 +117,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 chrome.tabs.query({ active: true, windowId: w.id }, tabs => {
                     const currTab = tabs[0];
                     if (currTab) {
+                        chrome.storage.local.remove('recordingIds')
                         chrome.scripting.executeScript({
                             target: { tabId: currTab.id },
                             func: start,
