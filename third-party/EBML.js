@@ -65,7 +65,7 @@ var EBMLDecoder = /** @class */ (function () {
         // read ebml id vint without first byte
         var tag = tools_1.readVint(this._buffer, this._cursor);
         // tag が読めなかった
-        if (tag === null) {
+        if (tag == null) {
             return false;
         }
         // >>>>>>>>>
@@ -113,7 +113,7 @@ var EBMLDecoder = /** @class */ (function () {
         // read ebml datasize vint without first byte
         var size = tools_1.readVint(this._buffer, this._cursor);
         // まだ読めない
-        if (size === null) {
+        if (size == null) {
             return false;
         }
         // >>>>>>>>>
@@ -293,7 +293,7 @@ var EBMLEncoder = /** @class */ (function () {
         var tagName = elm.name;
         var tagId = this.getSchemaInfo(tagName);
         var tagData = elm.data;
-        if (tagId === null) {
+        if (tagId == null) {
             throw new Error('No schema entry found for ' + tagName);
         }
         var data = tools.encodeTag(tagId, tagData);
@@ -316,7 +316,7 @@ var EBMLEncoder = /** @class */ (function () {
     EBMLEncoder.prototype.startTag = function (elm) {
         var tagName = elm.name;
         var tagId = this.getSchemaInfo(tagName);
-        if (tagId === null) {
+        if (tagId == null) {
             throw new Error('No schema entry found for ' + tagName);
         }
         /**
@@ -341,7 +341,7 @@ var EBMLEncoder = /** @class */ (function () {
     EBMLEncoder.prototype.endTag = function (elm) {
         var tagName = elm.name;
         var tag = this._stack.pop();
-        if (tag === null) {
+        if (tag == null) {
             throw new Error("EBML structure is broken");
         }
         if (tag.elm.name !== elm.name) {
@@ -484,7 +484,7 @@ var EBMLReader = /** @class */ (function (_super) {
             }
             else {
                 var parent_1 = this.stack[this.stack.length - 1];
-                if (parent_1 !== null && parent_1.level >= elm.level) {
+                if (parent_1 != null && parent_1.level >= elm.level) {
                     // 閉じタグなしでレベルが下がったら閉じタグを挿入
                     this.stack.pop();
                     // From http://w3c.github.io/media-source/webm-byte-stream-format.html#webm-media-segments
@@ -1923,7 +1923,7 @@ function SlowBuffer (length) {
 }
 
 Buffer.isBuffer = function isBuffer (b) {
-  return !!(b !== null && b._isBuffer)
+  return !!(b != null && b._isBuffer)
 }
 
 Buffer.compare = function compare (a, b) {
@@ -3489,7 +3489,7 @@ function Buffer (arg, encodingOrOffset, length) {
 }
 
 // Fix subarray() in ES2016. See: https://github.com/feross/buffer/pull/97
-if (typeof Symbol !== 'undefined' && Symbol.species !== null &&
+if (typeof Symbol !== 'undefined' && Symbol.species != null &&
     Buffer[Symbol.species] === Buffer) {
   Object.defineProperty(Buffer, Symbol.species, {
     value: null,
@@ -3510,7 +3510,7 @@ function from (value, encodingOrOffset, length) {
     return fromArrayLike(value)
   }
 
-  if (value === null) {
+  if (value == null) {
     throw TypeError(
       'The first argument must be one of type string, Buffer, ArrayBuffer, Array, ' +
       'or Array-like Object. Received type ' + (typeof value)
@@ -3529,14 +3529,14 @@ function from (value, encodingOrOffset, length) {
   }
 
   var valueOf = value.valueOf && value.valueOf()
-  if (valueOf !== null && valueOf !== value) {
+  if (valueOf != null && valueOf !== value) {
     return Buffer.from(valueOf, encodingOrOffset, length)
   }
 
   var b = fromObject(value)
   if (b) return b
 
-  if (typeof Symbol !== 'undefined' && Symbol.toPrimitive !== null &&
+  if (typeof Symbol !== 'undefined' && Symbol.toPrimitive != null &&
       typeof value[Symbol.toPrimitive] === 'function') {
     return Buffer.from(
       value[Symbol.toPrimitive]('string'), encodingOrOffset, length
@@ -3715,7 +3715,7 @@ function SlowBuffer (length) {
 }
 
 Buffer.isBuffer = function isBuffer (b) {
-  return b !== null && b._isBuffer === true &&
+  return b != null && b._isBuffer === true &&
     b !== Buffer.prototype // so Buffer.isBuffer(Buffer.prototype) will be false
 }
 
@@ -5154,7 +5154,7 @@ function blitBuffer (src, dst, offset, length) {
 // See: https://github.com/feross/buffer/issues/166
 function isInstance (obj, type) {
   return obj instanceof type ||
-    (obj !== null && obj.constructor !== null && obj.constructor.name !== null &&
+    (obj != null && obj.constructor != null && obj.constructor.name != null &&
       obj.constructor.name === type.name)
 }
 function numberIsNaN (obj) {

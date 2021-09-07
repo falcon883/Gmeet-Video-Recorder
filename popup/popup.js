@@ -28,7 +28,7 @@ chrome.runtime.onMessage.addListener(
 
                     if (e != undefined) {
                         videoId = e.videoId
-                        if (ids !== null) {
+                        if (ids != null) {
                             isToggled = ids.includes(videoId)
                             console.log(isToggled);
                         }
@@ -88,7 +88,7 @@ function AddCard(parent, name, dp, videoId, isToggled) {
     <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
     </svg>`
 
-    if (videoId !== null) {
+    if (videoId != null) {
         addRecordListener(recBtn, videoId)
     } else {
         recBtn.classList.add('disabled')
